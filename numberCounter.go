@@ -10,11 +10,11 @@ func main() {
 	fmt.Scanf("%d", &number)
 	counter := make(map[int]int)
 
-	numberDivision := number
+	partOfDivision := number
 
-	for i := 0; numberDivision != 0; i++ {
-		counter[numberDivision%10]++
-		numberDivision = numberDivision / 10
+	for partOfDivision != 0 {
+		counter[partOfDivision%10]++
+		partOfDivision = partOfDivision / 10
 	}
 
 	printCounter(counter)
