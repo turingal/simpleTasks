@@ -2,26 +2,38 @@ package main
 
 import (
 	"fmt"
-	"regexp"
 )
 
 func main() {
 	var bytes string
 
 	fmt.Scanf("%s", &bytes)
-	re := regexp.MustCompile("1+|0+")
-
-	fmt.Println(getLength(re.FindAllString(bytes, -1)))
+	fmt.Println(getLength(bytes))
 }
 
-func getLength(chains []string) (res int) {
-	length := 0
+func getLength(stringData string) (res int) {
+	if len(stringData) == 0 {
+		return 0
+	}
 
-	for i := 0; i <= len(chains)-1; i++ {
-		if len(chains[i]) > length {
-			length = len(chains[i])
+	lengthCurr := 1
+	lengthMax := 0
+
+	for i := 1; i < len(stringData); i++ {
+		if stringData[i] == stringData[i-1] {
+			lengthCurr++
+			continue
+		}
+
+		if lengthCurr > lengthMax {
+			lengthMax = lengthCurr
+			lengthCurr = 1
 		}
 	}
 
-	return length
+	if lengthCurr > lengthMax {
+		return lengthCurr
+	}
+
+	return lengthMax
 }
